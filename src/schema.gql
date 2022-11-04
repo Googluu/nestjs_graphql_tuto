@@ -11,3 +11,12 @@ type Post {
 type Query {
   posts: [Post!]!
 }
+
+type Mutation {
+  createPost(postInput: CreatePost!): Post!
+}
+
+input CreatePost {
+  title: String!
+  content: String
+}
