@@ -1,11 +1,22 @@
 /* eslint-disable prettier/prettier */
 import { Field, InputType } from '@nestjs/graphql';
+import { IsNotEmpty, MaxLength, MinLength } from 'class-validator';
 
 @InputType()
 export class CreatePost {
   @Field()
+  @IsNotEmpty({
+    message: "Title is required"
+  })
+  @MaxLength(100, {
+    message: "Title is too Long",
+  })
+  @MinLength(3, {
+    message: "Title is too short"
+  })
   title: string;
 
-  @Field()
-  content: string;
+  @Field({ nullable: true })
+  @MaxLength(400)
+  content?: string;
 }
